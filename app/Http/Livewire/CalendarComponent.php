@@ -24,13 +24,16 @@ class CalendarComponent extends Component
     public function requestBooking($date)
     {
         Booking::create([
-            'date'   => $date,
+            'date' => $date,
             'status' => 'pending',
-            'user_id' => auth()->id(), // se l'utente è loggato
+            'user_id' => auth()->check() ? auth()->id() : null,
         ]);
 
         $this->refreshBookings();
+
+        // Questo metodo dovrebbe essere disponibile se il componente estende Livewire\Component
         $this->emit('bookingUpdated');
+
         session()->flash('message', 'Richiesta di prenotazione inviata!');
     }
 
