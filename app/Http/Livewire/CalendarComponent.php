@@ -31,7 +31,7 @@ class CalendarComponent extends Component
 
         $this->refreshBookings();
 
-        // Questo metodo dovrebbe essere disponibile se il componente estende Livewire\Component
+        // Questo dovrebbe funzionare perché "emit" è gestito da Livewire\Component tramite __call e Macroable.
         $this->emit('bookingUpdated');
 
         session()->flash('message', 'Richiesta di prenotazione inviata!');
